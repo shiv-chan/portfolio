@@ -1,3 +1,14 @@
-export default function Home() {
-	return;
+import { documentToReactComponents as renderRichText } from "@contentful/rich-text-react-renderer";
+import { worksOptions } from "@/app/lib/utils";
+import { getEntries } from "./lib/data";
+import { Document } from "@contentful/rich-text-types";
+
+export default async function Home() {
+	const document = await getEntries("summary");
+	return (
+		<div className='mx-8 pb-20 2xl:pt-8 text-lavender leading-relaxed'>
+			{document &&
+				renderRichText(document[0].fields.summary as Document, worksOptions)}
+		</div>
+	);
 }
