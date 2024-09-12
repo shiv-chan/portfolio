@@ -1,3 +1,37 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+	html {
+		font-size: 16px; /* 1rem = 16px on default screens */
+	}
+
+	b {
+		font-weight: 700;
+	}
+
+	@media (min-width: 640px) {
+		html {
+			font-size: 16px; /* Adjust rem for small screens (sm breakpoint) */
+		}
+	}
+
+	@media (min-width: 768px) {
+		html {
+			font-size: 18px; /* Set rem for medium screens (md breakpoint) */
+		}
+	}
+
+	@media (min-width: 1024px) {
+		html {
+			font-size: 20px; /* Set rem for large screens (lg breakpoint) */
+		}
+	}
+
+	@media (min-width: 1280px) {
+		html {
+			font-size: 22px; /* Set rem for extra-large screens (xl breakpoint) */
+		}
+	}
+}
