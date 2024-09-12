@@ -16,10 +16,14 @@ const config: Config = {
 			colors: {
 				lavender: {
 					DEFAULT: "#87288F",
+					light: "#E1C9E3",
 				},
 			},
 			dropShadow: {
 				selected: "4px 4px 0 rgba(0, 0, 0, 1)",
+			},
+			boxShadow: {
+				selected: "4px 4px 0 0 rgba(0, 0, 0, 1)",
 			},
 		},
 	},
