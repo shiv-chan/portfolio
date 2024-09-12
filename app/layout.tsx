@@ -3,7 +3,9 @@ import "@/app/ui/global.css";
 import { mulish } from "./ui/fonts";
 import Menu from "./ui/menu";
 import SocialMedia from "./ui/socialMedia";
+import { OpenToWorkBanner } from "./ui/banner";
 import Image from "next/image";
+import clsx from "clsx";
 
 export const metadata: Metadata = {
 	title: "Kaho Shibuya - Software Developer",
@@ -36,17 +38,12 @@ export default function RootLayout({
 }>) {
 	return (
 		<html lang='en' className={mulish.className}>
-			<body>
-				<Menu openToWork />
-				{children}
-				<Image
-					src='/logo.png'
-					width={192}
-					height={192}
-					alt='logo'
-					className='fixed -bottom-10 -left-20 -z-10'
-				/>
-				<SocialMedia />
+			<body className='grid md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6'>
+				<OpenToWorkBanner />
+				<Menu />
+				<div className='md:mt-8 md:col-span-2 xl:col-start-2 xl:col-end-5 2xl:col-start-3 2xl:col-end-7'>
+					{children}
+				</div>
 			</body>
 		</html>
 	);
