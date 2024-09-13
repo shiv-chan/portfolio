@@ -3,6 +3,7 @@ import "@/app/ui/global.css";
 import { mulish } from "./ui/fonts";
 import Menu from "./ui/menu";
 import SocialMedia from "./ui/socialMedia";
+import ScrollTop from "./ui/scrollTop";
 import { OpenToWorkBanner } from "./ui/banner";
 import Image from "next/image";
 import clsx from "clsx";
@@ -44,6 +45,7 @@ export default function RootLayout({
 				<div className='md:mt-8 md:col-span-2 xl:col-start-2 xl:col-end-5 2xl:col-start-3 2xl:col-end-7'>
 					{children}
 				</div>
+				<ScrollTop />
 			</body>
 		</html>
 	);
