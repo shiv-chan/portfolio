@@ -1,5 +1,5 @@
 import { getEntries } from "../lib/data";
-import ProjectList from "../ui/projectList";
+import ProjectList from "../ui/works/projectList";
 
 export default async function Page() {
 	const document = await getEntries("works");

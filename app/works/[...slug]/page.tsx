@@ -6,7 +6,7 @@ import { documentToReactComponents as renderRichText } from "@contentful/rich-te
 import { worksOptions } from "@/app/lib/utils";
 import { Document } from "@contentful/rich-text-types";
 import { IoCloseOutline } from "react-icons/io5";
-import TechStack from "@/app/ui/techStack";
+import TechStack from "@/app/ui/works/techStack";
 import { FaGlobe, FaGithub } from "react-icons/fa6";
 
 interface DocumentFields {

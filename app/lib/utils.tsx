@@ -2,15 +2,15 @@ import { INLINES, MARKS, BLOCKS, Node } from "@contentful/rich-text-types";
 import Image from "next/image";
 
 const Paragraph = ({ children }: Readonly<{ children: React.ReactNode }>) => (
-	<p className='mb-2 font-light font-base'>{children}</p>
+	<p className='mb-2 font-light font-base leading-relaxed'>{children}</p>
 );
 const OrderedList = ({ children }: Readonly<{ children: React.ReactNode }>) => (
-	<ol className='list-decimal my-8 font-light ml-4 font-base'>{children}</ol>
+	<ol className='list-decimal font-light ml-4 font-base'>{children}</ol>
 );
 const UnorderedList = ({
 	children,
 }: Readonly<{ children: React.ReactNode }>) => (
-	<ul className='list-disc my-8 font-light ml-4 font-base'>{children}</ul>
+	<ul className='list-disc font-light ml-4 font-base'>{children}</ul>
 );
 const HyperLink = ({
 	children,
@@ -80,4 +80,27 @@ export const worksOptions = {
 		[MARKS.CODE]: (text: React.ReactNode) => <Code>{text}</Code>,
 	},
 	preserveWhitespace: true,
+};
+
+export const reverseChronologicalSort = (
+	content: any[],
+	sortBy: "startDate" | "endDate"
+): any[] => {
+	return content.sort((a, b) => {
+		if (a.fields[sortBy] == undefined || b.fields[sortBy] == undefined)
+			return 1;
+		return (
+			Date.parse(b.fields[sortBy] as string) -
+			Date.parse(a.fields[sortBy] as string)
+		);
+	});
+};
+
+export const formatUSDate = (date: string): string => {
+	return date
+		? new Intl.DateTimeFormat("en-US", {
+				year: "numeric",
+				month: "long",
+		  }).format(new Date(date))
+		: "Current";
 };
