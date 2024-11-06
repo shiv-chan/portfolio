@@ -40,6 +40,7 @@ export default function Menu() {
 					width={192}
 					height={192}
 					alt='logo'
+					priority={true}
 					className='fixed -bottom-[40px] -left-[80px] -z-10 2xl:absolute 2xl:top-0 2xl:left-0'
 				/>
 			</div>

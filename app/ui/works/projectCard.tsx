@@ -26,7 +26,7 @@ export default function ProjectCard({
 				techStack={techStack}
 				limit={5}
 				iconOnly
-				className={"flex flex-wrap gap-3 text-xl max-w-full px-3"}
+				className={"flex flex-wrap gap-3 text-lg max-w-full px-3"}
 			/>
 		</Link>
 	);
