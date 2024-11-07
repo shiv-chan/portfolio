@@ -42,7 +42,7 @@ export default function RootLayout({
 			<body className='grid md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6'>
 				<OpenToWorkBanner />
 				<Menu />
-				<div className='md:mt-8 md:col-span-2 xl:col-start-2 xl:col-end-5 2xl:col-start-3 2xl:col-end-7'>
+				<div className='relative md:mt-8 md:col-span-2 xl:col-start-2 xl:col-end-5 2xl:col-start-3 2xl:col-end-7'>
 					{children}
 				</div>
 				<ScrollTop />
