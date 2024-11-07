@@ -2,11 +2,8 @@ import type { Metadata } from "next";
 import "@/app/ui/global.css";
 import { mulish } from "./ui/fonts";
 import Menu from "./ui/menu";
-import SocialMedia from "./ui/socialMedia";
 import ScrollTop from "./ui/scrollTop";
 import { OpenToWorkBanner } from "./ui/banner";
-import Image from "next/image";
-import clsx from "clsx";
 
 export const metadata: Metadata = {
 	title: "Kaho Shibuya - Software Developer",
