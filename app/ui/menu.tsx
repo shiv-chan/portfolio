@@ -28,7 +28,13 @@ export default function Menu() {
 	return (
 		<div className='text-lavender md:h-dvh md:col-start-1 2xl:col-start-2 2xl:col-end-3 2xl:relative 2xl:pt-8'>
 			<div className='md:fixed md:w-min min-[2300px]:w-auto'>
-				<Link href='/' className='m-8 inline-block '>
+				<Link
+					href='/'
+					className='m-8 inline-block'
+					onClick={() => {
+						window.scrollTo(0, 0);
+					}}
+				>
 					<h1 className='text-3xl font-bold uppercase'>Kaho Shibuya</h1>
 					<p className='text-base font-thin'>Software Developer</p>
 				</Link>
