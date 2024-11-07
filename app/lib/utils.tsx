@@ -5,12 +5,12 @@ const Paragraph = ({ children }: Readonly<{ children: React.ReactNode }>) => (
 	<p className='mb-2 font-light font-base leading-relaxed'>{children}</p>
 );
 const OrderedList = ({ children }: Readonly<{ children: React.ReactNode }>) => (
-	<ol className='list-decimal font-light ml-4 font-base'>{children}</ol>
+	<ol className='list-decimal font-light ml-4 my-8 font-base'>{children}</ol>
 );
 const UnorderedList = ({
 	children,
 }: Readonly<{ children: React.ReactNode }>) => (
-	<ul className='list-disc font-light ml-4 font-base'>{children}</ul>
+	<ul className='list-disc font-light ml-4 my-8 font-base'>{children}</ul>
 );
 const HyperLink = ({
 	children,
