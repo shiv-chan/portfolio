@@ -20,6 +20,7 @@ import {
 	SiVercel,
 	SiNuxtdotjs,
 	SiFigma,
+	SiContentful,
 } from "react-icons/si";
 
 import clsx from "clsx";
@@ -49,6 +50,7 @@ const techStackIcons: Record<string, IconType> = {
 	vercel: SiVercel,
 	nuxt: SiNuxtdotjs,
 	figma: SiFigma,
+	contentful: SiContentful,
 };
 
 export default function TechStack({
