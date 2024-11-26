@@ -65,7 +65,7 @@ export const worksOptions = {
 			const { url, details } = file;
 			return (
 				<EmbeddedAsset
-					src={`https://${url}`}
+					src={`https:${url}`}
 					width={details.image.width}
 					height={details.image.height}
 					alt={title}
