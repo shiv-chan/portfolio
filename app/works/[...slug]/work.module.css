@@ -1,0 +1,6 @@
+.about ul p,
+.about ol p,
+.notes ul p,
+.notes ol p {
+	margin-bottom: 0.5rem;
+}

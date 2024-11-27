@@ -1,8 +1,16 @@
 import { INLINES, MARKS, BLOCKS, Node } from "@contentful/rich-text-types";
 import Image from "next/image";
 
-const Paragraph = ({ children }: Readonly<{ children: React.ReactNode }>) => (
-	<p className='mb-2 font-light font-base leading-relaxed'>{children}</p>
+const Paragraph = ({
+	children,
+	mb = 2,
+}: Readonly<{ children: React.ReactNode; mb?: number }>) => (
+	<p className={`mb-${mb} font-light font-base leading-relaxed`}>{children}</p>
+);
+const H5 = ({ children }: Readonly<{ children: React.ReactNode }>) => (
+	<h5 className='text-lg font-bold font-base leading-relaxed mb-2'>
+		{children}
+	</h5>
 );
 const OrderedList = ({ children }: Readonly<{ children: React.ReactNode }>) => (
 	<ol className='list-decimal font-light ml-4 my-8 font-base'>{children}</ol>
@@ -53,6 +61,9 @@ export const options = {
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (node: Node, children: React.ReactNode) => (
 			<Paragraph>{children}</Paragraph>
+		),
+		[BLOCKS.HEADING_5]: (node: Node, children: React.ReactNode) => (
+			<H5>{children}</H5>
 		),
 		[BLOCKS.OL_LIST]: (node: Node, children: React.ReactNode) => (
 			<OrderedList>{children}</OrderedList>

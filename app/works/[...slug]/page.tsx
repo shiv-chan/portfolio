@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
 import Image from "next/image";
+import styles from "./work.module.css";
 import { getEntry } from "@/app/lib/data";
 import { documentToReactComponents as renderRichText } from "@contentful/rich-text-react-renderer";
 import { worksOptions } from "@/app/lib/utils";
@@ -36,7 +37,7 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 		slug,
 	}: DocumentFields = document.fields as unknown as DocumentFields;
 	return (
-		<div className='mx-8 pb-20 text-lavender'>
+		<div className='mx-8 pb-20 text-lavender max-w-4xl'>
 			{document && (
 				<main className='grid grid-cols-1 gap-y-9'>
 					<div>
@@ -95,13 +96,13 @@ export default async function Page({ params }: { params: { slug: string[] } }) {
 						</ul>
 					</div>
 					{about && (
-						<div>
+						<div className={styles.about}>
 							<h2 className='text-xl uppercase font-bold mb-4'>About</h2>
 							{renderRichText(about as Document, worksOptions)}
 						</div>
 					)}
 					{notes && (
-						<div>
+						<div className={styles.notes}>
 							<h2 className='text-xl uppercase font-bold mb-4'>Notes</h2>
 							{renderRichText(notes as Document, worksOptions)}
 						</div>
