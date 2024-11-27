@@ -49,7 +49,7 @@ const EmbeddedAsset = ({
 	/>
 );
 
-export const worksOptions = {
+export const options = {
 	renderNode: {
 		[BLOCKS.PARAGRAPH]: (node: Node, children: React.ReactNode) => (
 			<Paragraph>{children}</Paragraph>
@@ -80,6 +80,16 @@ export const worksOptions = {
 		[MARKS.CODE]: (text: React.ReactNode) => <Code>{text}</Code>,
 	},
 	preserveWhitespace: true,
+};
+
+export const worksOptions = {
+	...options,
+	renderNode: {
+		...options.renderNode,
+		[BLOCKS.PARAGRAPH]: (node: Node, children: React.ReactNode) => (
+			<Paragraph mb={4}>{children}</Paragraph>
+		),
+	},
 };
 
 export const reverseChronologicalSort = (

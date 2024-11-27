@@ -1,5 +1,5 @@
 import { getEntries } from "@/app/lib/data";
-import { worksOptions, reverseChronologicalSort } from "@/app/lib/utils";
+import { options, reverseChronologicalSort } from "@/app/lib/utils";
 import { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents as renderRichText } from "@contentful/rich-text-react-renderer";
 import ExperienceSection from "../ui/about/experienceSection";
@@ -18,7 +18,7 @@ export default async function Page() {
 		<div className='grid gap-9 mx-8 pb-20 text-lavender leading-relaxed 2xl:pt-8'>
 			{summary && (
 				<div>
-					{renderRichText(summary[0].fields.summary as Document, worksOptions)}
+					{renderRichText(summary[0].fields.summary as Document, options)}
 				</div>
 			)}
 			{skills && (

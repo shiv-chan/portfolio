@@ -1,6 +1,6 @@
 "use client";
 
-import { formatUSDate, worksOptions } from "@/app/lib/utils";
+import { formatUSDate, options } from "@/app/lib/utils";
 import { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents as renderRichText } from "@contentful/rich-text-react-renderer";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa6";
@@ -57,7 +57,7 @@ export function Experience({
 				</p>
 			</div>
 			<div className={showDetails ? "block" : "hidden"}>
-				{renderRichText(description as Document, worksOptions)}
+				{renderRichText(description as Document, options)}
 			</div>
 		</>
 	);
