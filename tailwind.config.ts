@@ -25,6 +25,25 @@ const config: Config = {
 			boxShadow: {
 				selected: "4px 4px 0 0 rgba(0, 0, 0, 1)",
 			},
+			keyframes: {
+				rise: {
+					"0%": {
+						transform: "translateY(20px)",
+						opacity: "0%",
+					},
+					"100%": {
+						transform: "translateY(0)",
+						opacity: "1",
+					},
+				},
+			},
+			animation: {
+				rise: "rise 1s ease-in-out",
+				riseDelay500: "rise 1s ease-in-out 500ms",
+				riseDelay1000: "rise 1s ease-in-out 1000ms",
+				riseDelay1500: "rise 1s ease-in-out 1500ms",
+				riseDelay2000: "rise 1s ease-in-out 2000ms",
+			},
 		},
 	},
 	plugins: [],
