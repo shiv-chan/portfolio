@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 		siteName: "Kaho Shibuya - Software Developer",
 		images: [
 			{
-				url: "https://kahoshibuya.dev/opengraph.png", // Must be an absolute URL
+				url: "https://kahoshibuya.dev/_next/image?url=%2Fopengraph.png&w=3840&q=75", // Must be an absolute URL
 				width: 1200,
 				height: 630,
 			},
