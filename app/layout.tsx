@@ -14,21 +14,21 @@ export const metadata: Metadata = {
 		capable: true,
 		statusBarStyle: "black-translucent",
 	},
-	// openGraph: {
-	// 	title: "Kaho Shibuya - Software Developer",
-	// 	description: "Kaho Shibuya's portfolio website",
-	// 	url: "",
-	// 	siteName: "Kaho Shibuya - Software Developer",
-	// 	images: [
-	// 		{
-	// 			url: "", // Must be an absolute URL
-	// 			width: 1200,
-	// 			height: 630,
-	// 		},
-	// 	],
-	// 	locale: "en_US",
-	// 	type: "website",
-	// },
+	openGraph: {
+		title: "Kaho Shibuya - Software Developer",
+		description: "Kaho Shibuya's portfolio website",
+		url: "https://kahoshibuya.dev/",
+		siteName: "Kaho Shibuya - Software Developer",
+		images: [
+			{
+				url: "https://kahoshibuya.dev/opengraph.png", // Must be an absolute URL
+				width: 1200,
+				height: 630,
+			},
+		],
+		locale: "en_US",
+		type: "website",
+	},
 };
 
 export default function RootLayout({
