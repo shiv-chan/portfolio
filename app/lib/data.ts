@@ -24,3 +24,54 @@ export async function getEntry(id: string) {
 		throw new Error(`Failed to get entry: ${error}`);
 	}
 }
+
+const { CF_SPACE_ID, CF_DELIVERY_ACCESS_TOKEN } = process.env as {
+	[key: string]: string;
+};
+
+async function fetchGraphQL(query: string) {
+	const baseURL = "https://graphql.contentful.com/content/v1/spaces/";
+
+	try {
+		const response = await fetch(`${baseURL}${CF_SPACE_ID}`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json",
+				Authorization: `Bearer ${CF_DELIVERY_ACCESS_TOKEN}`,
+			},
+			body: JSON.stringify({ query }),
+			next: { tags: ["contents"] },
+		});
+		const json = await response.json();
+		// console.log(contents);
+
+		if (!response.ok) {
+			throw new Error(
+				`${
+					json?.message ||
+					json.errors.map((ele: any) => ele.message).join("\n") ||
+					"Something went wrong!"
+				}`
+			);
+		}
+		return json;
+	} catch (error) {
+		throw new Error(`Failed to fetch GraphQL: ${error}`);
+	}
+}
+
+export async function getSummary() {
+	const query = `
+		query {
+  			summaryCollection(limit:1){
+    			items {
+      				summary {
+        				json
+      				}
+    			}
+  			}
+		}
+	`;
+	const response = await fetchGraphQL(query);
+	return response.data.summaryCollection.items[0].summary.json;
+}
