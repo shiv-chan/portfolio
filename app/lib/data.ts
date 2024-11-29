@@ -70,8 +70,58 @@ export async function getSummary() {
       				}
     			}
   			}
+		}`;
+	const response = await fetchGraphQL(query);
+	return response.data.summaryCollection.items[0].summary.json;
+}
+
+export async function getSkills() {
+	const query = `
+		query {
+  			skillsCollection(limit: 1) {
+    			items {
+      				skills
+    			}
+  			}
+		}`;
+	const response = await fetchGraphQL(query);
+	return response.data.skillsCollection.items[0].skills;
+}
+
+export async function getExperiences(limit: number = 3) {
+	const query = `
+		query {
+			experienceCollection(order: endDate_DESC, limit: ${limit}) {
+				items {
+					_id
+					title
+					company
+					startDate
+					endDate
+					description {
+						json
+					}
+				}
+			}
+		}`;
+	const response = await fetchGraphQL(query);
+	return response.data.experienceCollection.items;
+}
+
+export async function getEducations() {
+	const query = `
+		query {
+			educationCollection(order: endDate_DESC) {
+				items {
+					_id
+					school
+					degree
+					startDate
+					endDate
+				}
+			}
 		}
 	`;
 	const response = await fetchGraphQL(query);
-	return response.data.summaryCollection.items[0].summary.json;
+	return response.data.educationCollection.items;
 }
