@@ -1,22 +1,15 @@
 import Link from "next/link";
 import TechStack from "./techStack";
-
-export interface ProjectCardProps {
-	title: string;
-	techStack: string[];
-	slug: string;
-	id: string;
-}
+import { Project } from "./projectList";
 
 export default function ProjectCard({
 	title,
 	techStack,
 	slug,
-	id,
-}: ProjectCardProps) {
+}: Omit<Project, "_id">) {
 	return (
 		<Link
-			href={`/works/${slug}/${id}`}
+			href={`/works/${slug}`}
 			className='group w-full min-h-48 bg-white border border-lavender border-solid flex gap-6 flex-col items-center justify-center p-8 hover:shadow-black hover:shadow-selected hover:bg-lavender hover:cursor-pointer duration-500'
 		>
 			<h2 className='text-xl font-bold text-center text-lavender px-6 group-hover:text-white'>

@@ -1,39 +1,12 @@
-import { createClient } from "contentful";
-import { notFound } from "next/navigation";
-
-const client = createClient({
-	space: process.env.CF_SPACE_ID as string,
-	accessToken: process.env.CF_DELIVERY_ACCESS_TOKEN as string,
-});
-
-export async function getEntries(contentType: string) {
-	try {
-		const entries = await client.getEntries({ content_type: contentType });
-		if (entries.items.length) return entries.items;
-	} catch (error) {
-		notFound();
-		throw new Error(`Failed to get entries: ${error}`);
-	}
-}
-
-export async function getEntry(id: string) {
-	try {
-		const entry = await client.getEntry(id);
-		return entry;
-	} catch (error) {
-		throw new Error(`Failed to get entry: ${error}`);
-	}
-}
-
 const { CF_SPACE_ID, CF_DELIVERY_ACCESS_TOKEN } = process.env as {
 	[key: string]: string;
 };
 
 async function fetchGraphQL(query: string) {
-	const baseURL = "https://graphql.contentful.com/content/v1/spaces/";
+	const endpoint = `https://graphql.contentful.com/content/v1/spaces/${CF_SPACE_ID}`;
 
 	try {
-		const response = await fetch(`${baseURL}${CF_SPACE_ID}`, {
+		const response = await fetch(`${endpoint}`, {
 			method: "POST",
 			headers: {
 				"Content-Type": "application/json",
@@ -43,7 +16,6 @@ async function fetchGraphQL(query: string) {
 			next: { tags: ["contents"] },
 		});
 		const json = await response.json();
-		// console.log(contents);
 
 		if (!response.ok) {
 			throw new Error(
@@ -124,4 +96,66 @@ export async function getEducations() {
 	`;
 	const response = await fetchGraphQL(query);
 	return response.data.educationCollection.items;
+}
+
+export async function getWorks(limit: number = 9) {
+	const query = `
+		query {
+			worksCollection(order: sys_firstPublishedAt_DESC, limit: ${limit}) {
+				items {
+					_id
+					title
+					techStack
+					slug
+				}
+			}
+		}
+	`;
+	const response = await fetchGraphQL(query);
+	return response.data.worksCollection.items;
+}
+
+export async function getWork(slug: string) {
+	const query = `
+		query {
+			worksCollection(where: {slug: "${slug}"}, limit: 1) {
+				items {
+					previewUrl
+					sourceUrl
+					thumbnail {
+						title
+						url
+						width
+						height
+					}
+					title
+					techStack
+					roles
+					about {
+						json
+					}
+					notes {
+						json
+					}
+				}
+			}
+		}
+	`;
+	const response = await fetchGraphQL(query);
+	return response.data.worksCollection.items[0];
+}
+
+export async function getAsset(id: string) {
+	const query = `
+		query {
+			asset(id: "${id}") {
+				title
+				url
+				width
+				height
+			}
+		}
+	`;
+	const response = await fetchGraphQL(query);
+	return response.data.asset;
 }

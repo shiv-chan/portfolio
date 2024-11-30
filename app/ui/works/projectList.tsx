@@ -1,30 +1,17 @@
-import { Entry, EntrySkeletonType } from "contentful";
-import ProjectCard, { ProjectCardProps } from "./projectCard";
+import ProjectCard from "./projectCard";
 
-export default function ProjectList({
-	projects,
-}: {
-	projects: Entry<EntrySkeletonType, undefined, string>[] | undefined;
-}) {
-	return (
-		projects &&
-		projects.map(d => {
-			if (d.hasOwnProperty("fields") && d.hasOwnProperty("sys")) {
-				const { title, techStack, slug } = d.fields as unknown as Omit<
-					ProjectCardProps,
-					"id"
-				>;
-				const { id } = d.sys as { [key: string]: any };
-				return (
-					<ProjectCard
-						key={d.sys.id}
-						title={title}
-						techStack={techStack}
-						slug={slug}
-						id={id}
-					/>
-				);
-			}
-		})
-	);
+export interface Project {
+	_id: string;
+	title: string;
+	techStack: string[];
+	slug: string;
+}
+
+export default function ProjectList({ projects }: { projects: Project[] }) {
+	return projects.map(project => {
+		const { _id, title, techStack, slug } = project;
+		return (
+			<ProjectCard key={_id} title={title} techStack={techStack} slug={slug} />
+		);
+	});
 }
