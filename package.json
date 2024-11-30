@@ -13,7 +13,6 @@
     "@contentful/rich-text-types": "^16.8.5",
     "@emailjs/browser": "^4.4.1",
     "clsx": "^2.1.1",
-    "contentful": "^10.15.0",
     "lodash": "^4.17.21",
     "next": "14.2.5",
     "react": "^18",
