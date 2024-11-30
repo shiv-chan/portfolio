@@ -13,7 +13,9 @@ export default function Error({
 }) {
 	return (
 		<div className='text-lavender mx-8 pb-20 2xl:pt-8'>
-			<h2 className='text-xl font-bold mb-1'>Oops! Something went wrong...</h2>
+			<h2 className='text-xl font-bold mb-1'>
+				Oops! Something went wrong...can't find the work
+			</h2>
 			<p className='font-light mb-4'>
 				Please come back and try again later{" "}
 				<FaRegFaceFrown className='inline' />
