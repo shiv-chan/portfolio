@@ -13,7 +13,7 @@ async function fetchGraphQL(query: string) {
 				Authorization: `Bearer ${CF_DELIVERY_ACCESS_TOKEN}`,
 			},
 			body: JSON.stringify({ query }),
-			next: { tags: ["contents"] },
+			next: { tags: ["about", "works"] },
 		});
 		const json = await response.json();
 
