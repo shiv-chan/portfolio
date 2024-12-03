@@ -2,6 +2,7 @@ import { revalidateTag } from "next/cache";
 import { NextResponse } from "next/server";
 
 const { CF_REVALIDATE_SECRET } = process.env;
+import { tags } from "@/app/lib/data";
 
 export async function POST(request: Request) {
 	const requestHeaders = new Headers(request.headers);
@@ -12,18 +13,13 @@ export async function POST(request: Request) {
 		return NextResponse.json({ message: "Invalid secret" }, { status: 401 });
 	}
 
-	switch (tag) {
-		case "about": {
-			revalidateTag("about");
-			break;
-		}
-		case "works": {
-			revalidateTag("works");
-			break;
-		}
-		default:
-			return NextResponse.json({ error: "Invalid tag" }, { status: 400 });
-	}
+	const revalidatedResponse = (tag: string) =>
+		NextResponse.json({ revalidated: true, tag, now: Date.now() });
 
-	return NextResponse.json({ revalidated: true, tag, now: Date.now() });
+	if (tag && tags.includes(tag)) {
+		revalidateTag(tag);
+		return revalidatedResponse(tag);
+	} else {
+		return NextResponse.json({ error: "Invalid tag" }, { status: 400 });
+	}
 }

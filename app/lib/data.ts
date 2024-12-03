@@ -2,6 +2,8 @@ const { CF_SPACE_ID, CF_DELIVERY_ACCESS_TOKEN } = process.env as {
 	[key: string]: string;
 };
 
+export const tags: string[] = ["about", "works"];
+
 async function fetchGraphQL(query: string) {
 	const endpoint = `https://graphql.contentful.com/content/v1/spaces/${CF_SPACE_ID}`;
 
@@ -13,7 +15,7 @@ async function fetchGraphQL(query: string) {
 				Authorization: `Bearer ${CF_DELIVERY_ACCESS_TOKEN}`,
 			},
 			body: JSON.stringify({ query }),
-			next: { tags: ["about", "works"] },
+			next: { tags },
 		});
 		const json = await response.json();
 
