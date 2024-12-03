@@ -21,6 +21,7 @@ import {
 	SiNuxtdotjs,
 	SiFigma,
 	SiContentful,
+	SiGraphql,
 } from "react-icons/si";
 
 import clsx from "clsx";
@@ -51,6 +52,7 @@ const techStackIcons: Record<string, IconType> = {
 	nuxt: SiNuxtdotjs,
 	figma: SiFigma,
 	contentful: SiContentful,
+	graphql: SiGraphql,
 };
 
 export default function TechStack({
@@ -64,11 +66,11 @@ export default function TechStack({
 			{techStack.length &&
 				techStack.map((t, index) => {
 					const icon = React.createElement(
-						techStackIcons[t.toLocaleLowerCase()],
-						{ title: t }
+						techStackIcons[t.toLocaleLowerCase().trim()],
+						{ title: t, key: index }
 					);
 					const iconWithText = (
-						<div className='flex items-center gap-2'>
+						<div className='flex items-center gap-2' key={index}>
 							{icon}
 							<p>{t}</p>
 						</div>

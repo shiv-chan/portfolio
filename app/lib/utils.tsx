@@ -1,3 +1,4 @@
+import { getAsset } from "./data";
 import { INLINES, MARKS, BLOCKS, Node } from "@contentful/rich-text-types";
 import Image from "next/image";
 
@@ -71,16 +72,11 @@ export const options = {
 		[BLOCKS.UL_LIST]: (node: Node, children: React.ReactNode) => (
 			<UnorderedList>{children}</UnorderedList>
 		),
-		[BLOCKS.EMBEDDED_ASSET]: (node: Node, children: React.ReactNode) => {
-			const { title, file } = node.data.target.fields;
-			const { url, details } = file;
+		[BLOCKS.EMBEDDED_ASSET]: async (node: Node, children: React.ReactNode) => {
+			const { id } = node.data.target.sys;
+			const { title, url, width, height } = await getAsset(id);
 			return (
-				<EmbeddedAsset
-					src={`https:${url}`}
-					width={details.image.width}
-					height={details.image.height}
-					alt={title}
-				/>
+				<EmbeddedAsset src={url} width={width} height={height} alt={title} />
 			);
 		},
 		[INLINES.HYPERLINK]: (node: Node, children: React.ReactNode) => (

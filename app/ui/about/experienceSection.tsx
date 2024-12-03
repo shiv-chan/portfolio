@@ -6,18 +6,29 @@ import { documentToReactComponents as renderRichText } from "@contentful/rich-te
 import { FaChevronRight, FaChevronDown } from "react-icons/fa6";
 import { useState } from "react";
 
+interface Experience {
+	_id: string;
+	title: string;
+	company: string;
+	startDate: string;
+	endDate: string;
+	description: {
+		json: Document;
+	};
+}
+
 export default function ExperienceSection({
-	experience,
+	experiences,
 }: {
-	experience: any[];
+	experiences: Experience[];
 }) {
 	return (
 		<div>
 			<h2 className='mb-4 text-xl uppercase font-bold'>Work Experience</h2>
-			{experience.map((ele, index) => {
+			{experiences.map((experience, index) => {
 				return (
-					<div key={ele.sys.id} className='mb-9'>
-						<Experience opened={index == 0} content={ele} />
+					<div key={experience._id} className='mb-9'>
+						<Experience opened={index == 0} content={experience} />
 					</div>
 				);
 			})}
@@ -30,9 +41,9 @@ export function Experience({
 	content,
 }: {
 	opened: boolean;
-	content: any;
+	content: Omit<Experience, "_id">;
 }) {
-	const { title, company, startDate, endDate, description } = content.fields;
+	const { title, company, startDate, endDate, description } = content;
 
 	// time format
 	const start = formatUSDate(startDate);
@@ -57,7 +68,7 @@ export function Experience({
 				</p>
 			</div>
 			<div className={showDetails ? "block" : "hidden"}>
-				{renderRichText(description as Document, options)}
+				{renderRichText(description.json as Document, options)}
 			</div>
 		</>
 	);
