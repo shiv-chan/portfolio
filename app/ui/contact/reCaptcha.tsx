@@ -12,6 +12,7 @@ export default function ReCaptcha() {
 			// @ts-ignore
 			const { ready, render } = window.grecaptcha.enterprise;
 			ready(() => {
+				console.log("recaptchaRef.current: ", recaptchaRef.current);
 				if (recaptchaRef.current) {
 					render(recaptchaRef.current, {
 						sitekey: process.env.NEXT_PUBLIC_SITE_KEY,
