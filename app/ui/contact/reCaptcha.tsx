@@ -5,7 +5,9 @@ import { useEffect, useRef } from "react";
 export default function ReCaptcha() {
 	const recaptchaRef = useRef(null);
 	const renderReCaptcha = () => {
+		// @ts-ignore
 		if (typeof window !== "undefined" && window.grecaptcha) {
+			// @ts-ignore
 			const { ready, render } = window.grecaptcha.enterprise;
 			ready(() => {
 				if (recaptchaRef.current) {
