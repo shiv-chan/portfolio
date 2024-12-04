@@ -1,12 +1,16 @@
-import Form from "../ui/contact/form";
+import Form from "@/app/ui/contact/form";
+import Script from "next/script";
 
 export default function Page() {
 	return (
-		<div className='mx-8 pb-20 2xl:pt-8'>
-			<h2 className='text-2xl font-bold uppercase text-lavender mb-4'>
-				Love to hear from you!
-			</h2>
-			<Form />
-		</div>
+		<>
+			<Script src='https://www.google.com/recaptcha/enterprise.js' />
+			<div className='mx-8 pb-20 2xl:pt-8'>
+				<h2 className='text-2xl font-bold uppercase text-lavender mb-4'>
+					Love to hear from you!
+				</h2>
+				<Form />
+			</div>
+		</>
 	);
 }

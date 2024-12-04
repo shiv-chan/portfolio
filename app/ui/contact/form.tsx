@@ -2,6 +2,7 @@
 
 import { sendEmail } from "@/app/lib/actions";
 import { SubmitMessageButton } from "../button";
+import ReCaptcha from "./reCaptcha";
 import { useFormState } from "react-dom";
 import ShortUniqueId from "short-unique-id";
 
@@ -68,6 +69,19 @@ export default function Form() {
 						className='text-sm text-red-500'
 					>
 						{state.errors.message}
+					</div>
+				)}
+			</div>
+			<div>
+				<ReCaptcha />
+				{state?.errors["g-recaptcha-response"] && (
+					<div
+						id='recaptcha-error'
+						aria-live='polite'
+						aria-atomic='true'
+						className='text-sm text-red-500'
+					>
+						{state.errors["g-recaptcha-response"]}
 					</div>
 				)}
 			</div>
