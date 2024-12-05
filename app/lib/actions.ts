@@ -6,6 +6,7 @@ export type Errors = {
 	user_name?: string;
 	user_email?: string;
 	message?: string;
+	"g-recaptcha-response"?: string;
 };
 
 export type State = {
@@ -20,10 +21,11 @@ export async function sendEmail(prevState: State | null, formData: FormData) {
 			user_name: "Please enter your name.",
 			user_email: "Please enter your email address.",
 			message: "Please write a message.",
+			"g-recaptcha-response": "Please answer the captcha.",
 		};
 
 		const entries = formData.entries() as IterableIterator<
-			["user_name" | "user_email" | "message", string]
+			["user_name" | "user_email" | "message" | "g-recaptcha-response", string]
 		>;
 		for (const [key, val] of entries) {
 			if (Boolean(val.trim())) {
@@ -49,11 +51,12 @@ export async function sendEmail(prevState: State | null, formData: FormData) {
 			};
 
 		await init({ publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY });
-		const response = await send("portfolio_contact", "contact_form", {
+		await send("portfolio_contact", "contact_form", {
 			contact_number: formData.get("contact_number"),
 			user_name: formData.get("user_name"),
 			user_email: formData.get("user_email"),
 			message: formData.get("message"),
+			"g-recaptcha-response": formData.get("g-recaptcha-response"),
 		});
 	} catch (error) {
 		console.error("Failed to send the message...", error);
