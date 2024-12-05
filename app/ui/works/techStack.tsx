@@ -23,6 +23,7 @@ import {
 	SiContentful,
 	SiGraphql,
 } from "react-icons/si";
+import { FaGears } from "react-icons/fa6";
 
 import clsx from "clsx";
 
@@ -66,7 +67,7 @@ export default function TechStack({
 			{techStack.length &&
 				techStack.map((t, index) => {
 					const icon = React.createElement(
-						techStackIcons[t.toLocaleLowerCase().trim()],
+						techStackIcons[t.toLocaleLowerCase().trim()] || FaGears,
 						{ title: t, key: index }
 					);
 					const iconWithText = (
