@@ -17,7 +17,7 @@ export default async function Page() {
 	const educations = await getEducations();
 
 	return (
-		<div className='grid gap-9 mx-8 pb-20 text-lavender leading-relaxed 2xl:pt-8'>
+		<div className='grid gap-9 mx-8 pb-20 text-lavender leading-relaxed max-w-4xl 2xl:pt-8'>
 			{summary && <div>{renderRichText(summary, options)}</div>}
 			{skills && (
 				<div>
