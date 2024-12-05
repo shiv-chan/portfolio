@@ -7,7 +7,6 @@ export default function Page() {
 		<>
 			<Script
 				src='https://www.google.com/recaptcha/enterprise.js'
-				strategy='beforeInteractive'
 				onReady={renderReCaptcha}
 			/>
 			<div className='mx-8 pb-20 2xl:pt-8'>

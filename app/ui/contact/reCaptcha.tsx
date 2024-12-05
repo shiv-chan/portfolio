@@ -6,10 +6,13 @@ export function renderReCaptcha() {
 		// @ts-ignore
 		const { ready, render } = window.grecaptcha.enterprise;
 		ready(() => {
-			render(document.querySelector(".g-recaptcha") as HTMLDivElement, {
-				sitekey: process.env.NEXT_PUBLIC_SITE_KEY,
-				action: "send-email",
-			});
+			const container = document.querySelector(".g-recaptcha") as HTMLElement;
+			if (container && !container.firstChild) {
+				render(container, {
+					sitekey: process.env.NEXT_PUBLIC_SITE_KEY,
+					action: "send-email",
+				});
+			}
 		});
 	}
 }
