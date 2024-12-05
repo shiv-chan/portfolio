@@ -2,21 +2,21 @@
 
 import { useEffect } from "react";
 
-export default function ReCaptcha() {
-	const renderReCaptcha = () => {
+export function renderReCaptcha() {
+	// @ts-ignore
+	if (typeof window !== "undefined" && window.grecaptcha) {
 		// @ts-ignore
-		if (typeof window !== "undefined" && window.grecaptcha) {
-			// @ts-ignore
-			const { ready, render } = window.grecaptcha.enterprise;
-			ready(() => {
-				render(document.querySelector(".g-recaptcha") as HTMLDivElement, {
-					sitekey: process.env.NEXT_PUBLIC_SITE_KEY,
-					action: "send-email",
-				});
+		const { ready, render } = window.grecaptcha.enterprise;
+		ready(() => {
+			console.log(document.querySelector(".g-recaptcha"));
+			render(document.querySelector(".g-recaptcha") as HTMLDivElement, {
+				sitekey: process.env.NEXT_PUBLIC_SITE_KEY,
+				action: "send-email",
 			});
-		}
-	};
-
+		});
+	}
+}
+export default function ReCaptcha() {
 	useEffect(() => renderReCaptcha, []);
 
 	return (
