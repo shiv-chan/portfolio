@@ -6,9 +6,8 @@ import { getWork } from "@/app/lib/data";
 import { documentToReactComponents as renderRichText } from "@contentful/rich-text-react-renderer";
 import { worksOptions } from "@/app/lib/utils";
 import { Document } from "@contentful/rich-text-types";
-import { IoCloseOutline } from "react-icons/io5";
+import { IoCloseOutline, IoCodeSlash, IoOpenOutline } from "react-icons/io5";
 import TechStack from "@/app/ui/works/techStack";
-import { FaGlobe, FaGithub } from "react-icons/fa6";
 
 interface Work {
 	previewUrl: string;
@@ -27,7 +26,8 @@ interface Work {
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
-	const work: Work = await getWork(params.slug);
+	const { slug } = params;
+	const work: Work = await getWork(slug);
 	const {
 		previewUrl,
 		sourceUrl,
@@ -43,20 +43,10 @@ export default async function Page({ params }: { params: { slug: string } }) {
 			<main className='grid grid-cols-1 gap-y-9'>
 				<div>
 					<div className='flex items-center mb-4 gap-4'>
-						<h1 className='text-xl uppercase font-bold'>{title}</h1>
-						<div className='flex gap-3 text-xl'>
-							{previewUrl && (
-								<a href={previewUrl} target='_blank'>
-									<FaGlobe />
-								</a>
-							)}
-							{sourceUrl && (
-								<a href={sourceUrl} target='_blank'>
-									<FaGithub />
-								</a>
-							)}
-						</div>
-						<Link href='/works' className='ml-auto'>
+						<h1 className='text-xl uppercase font-bold whitespace-nowrap'>
+							{title}
+						</h1>
+						<Link href='/works' className='ml-auto' aria-label='works'>
 							<IoCloseOutline className='text-2xl' />
 						</Link>
 					</div>
@@ -69,6 +59,30 @@ export default async function Page({ params }: { params: { slug: string } }) {
 							className='w-full max-w-xl'
 						/>
 					)}
+					<div className='mt-2 flex flex-col gap-2'>
+						{previewUrl && (
+							<a
+								href={previewUrl}
+								target='_blank'
+								className='flex gap-1 items-center w-fit underline'
+								aria-label='live preview'
+							>
+								<IoOpenOutline />
+								{"Live Preview"}
+							</a>
+						)}
+						{sourceUrl && (
+							<a
+								href={sourceUrl}
+								target='_blank'
+								className='flex gap-1 items-center w-fit underline'
+								aria-label='view source code'
+							>
+								<IoCodeSlash />
+								{"View Source Code"}
+							</a>
+						)}
+					</div>
 				</div>
 				<div>
 					<h2 className='text-xl uppercase font-bold mb-4'>Tech Stack</h2>
