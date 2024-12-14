@@ -20,7 +20,7 @@ export default function ReCaptcha() {
 	return (
 		<>
 			<div
-				className='g-recaptcha'
+				className='g-recaptcha h-[78px] before:block before:motion-safe:animate-pulse before:w-[300px] before:h-[74px] before:rounded before:bg-lavender-light before:-z-10 before:absolute'
 				data-sitekey={process.env.NEXT_PUBLIC_SITE_KEY}
 				data-action='send-email'
 				aria-describedby='recaptcha-error'
