@@ -39,7 +39,7 @@ export default function RootLayout({
 	return (
 		<html lang='en' className={clsx(mulish.className, "overscroll-y-none")}>
 			<body
-				className='grid md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 overscroll-contain'
+				className='grid min-w-80 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 overscroll-contain'
 				suppressHydrationWarning={true}
 			>
 				<NavigationProvider>
