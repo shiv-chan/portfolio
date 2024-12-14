@@ -4,7 +4,7 @@ import Image from "next/image";
 import styles from "./work.module.css";
 import { getWork } from "@/app/lib/data";
 import { documentToReactComponents as renderRichText } from "@contentful/rich-text-react-renderer";
-import { worksOptions } from "@/app/lib/utils";
+import { worksOptions, shimmer, toBase64 } from "@/app/lib/utils";
 import { Document } from "@contentful/rich-text-types";
 import { IoCloseOutline, IoCodeSlash, IoOpenOutline } from "react-icons/io5";
 import TechStack from "@/app/ui/works/techStack";
@@ -57,6 +57,9 @@ export default async function Page({ params }: { params: { slug: string } }) {
 							width={thumbnail.width}
 							height={thumbnail.height}
 							className='w-full max-w-xl'
+							placeholder={`data:image/svg+xml;base64,${toBase64(
+								shimmer(thumbnail.width, thumbnail.height)
+							)}`}
 						/>
 					)}
 					<div className='mt-2 flex flex-col gap-2'>
