@@ -66,6 +66,13 @@ export default function Menu() {
 
 	return (
 		<div className='text-lavender md:h-dvh md:col-start-1 2xl:col-start-2 2xl:col-end-3 2xl:relative 2xl:pt-8'>
+			<div
+				className={`${
+					pathname !== "/" || previousRoute || isAnimating ? "hidden" : "block"
+				} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 motion-safe:animate-loadingBounce`}
+			>
+				Loading...
+			</div>
 			<div className='md:fixed md:w-min min-[2300px]:w-auto'>
 				<Link
 					href='/'

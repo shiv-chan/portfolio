@@ -36,6 +36,20 @@ const config: Config = {
 						opacity: "1",
 					},
 				},
+				loadingBounce: {
+					"0%": {
+						transform: "translate(-50%, -25%)",
+						"animation-timing-function": "cubic-bezier(0.8,0,1,1)",
+					},
+					"50%": {
+						transform: "translate(-50%, -50%)",
+						"animation-timing-function": "cubic-bezier(0,0,0.2,1)",
+					},
+					"100%": {
+						transform: "translate(-50%, -25%)",
+						"animation-timing-function": "cubic-bezier(0.8,0,1,1)",
+					},
+				},
 			},
 			animation: {
 				rise: "rise 1s ease-in-out",
@@ -43,6 +57,7 @@ const config: Config = {
 				riseDelay1000: "rise 1s ease-in-out 1000ms",
 				riseDelay1500: "rise 1s ease-in-out 1500ms",
 				riseDelay2000: "rise 1s ease-in-out 2000ms",
+				loadingBounce: "loadingBounce 1s infinite",
 			},
 		},
 	},
