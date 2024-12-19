@@ -1,7 +1,8 @@
 "use client";
 
 import { useEffect } from "react";
-import PopUp from "../ui/contact/popup";
+import PopUp from "@/app/ui/contact/popup";
+import { useScopedI18n } from "@/locales/client";
 
 export default function Error({
 	error,
@@ -15,13 +16,15 @@ export default function Error({
 		console.error(error);
 	}, [error]);
 
+	const t = useScopedI18n("contactError");
+
 	return (
 		<div className='text-lavender mx-8 pb-20 2xl:pt-8'>
 			<PopUp
 				succeed={false}
-				heading='Error'
-				subText='Sorry...failed to send your message'
-				buttonText='OK'
+				heading={t("heading")}
+				subText={t("subText")}
+				buttonText={t("buttonText")}
 				link='/contact'
 				reset={reset}
 			/>

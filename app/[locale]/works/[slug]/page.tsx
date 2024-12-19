@@ -4,10 +4,11 @@ import Image from "next/image";
 import styles from "./work.module.css";
 import { getWork } from "@/app/lib/data";
 import { documentToReactComponents as renderRichText } from "@contentful/rich-text-react-renderer";
-import { worksOptions, shimmer, toBase64 } from "@/app/lib/utils";
+import { worksOptions, shimmer, toBase64, locales } from "@/app/lib/utils";
 import { Document } from "@contentful/rich-text-types";
 import { IoCloseOutline, IoCodeSlash, IoOpenOutline } from "react-icons/io5";
 import TechStack from "@/app/ui/works/techStack";
+import { getCurrentLocale, getScopedI18n } from "@/locales/server";
 
 interface Work {
 	previewUrl: string;
@@ -26,8 +27,10 @@ interface Work {
 }
 
 export default async function Page({ params }: { params: { slug: string } }) {
+	const t = await getScopedI18n("work");
 	const { slug } = params;
-	const work: Work = await getWork(slug);
+	const locale = await getCurrentLocale();
+	const work: Work = await getWork(slug, locales[locale]);
 	const {
 		previewUrl,
 		sourceUrl,
@@ -71,7 +74,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 								aria-label='live preview'
 							>
 								<IoOpenOutline />
-								{"Live Preview"}
+								{t("livePreview")}
 							</a>
 						)}
 						{sourceUrl && (
@@ -82,7 +85,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 								aria-label='view source code'
 							>
 								<IoCodeSlash />
-								{"View Source Code"}
+								{t("sourceCode")}
 							</a>
 						)}
 					</div>

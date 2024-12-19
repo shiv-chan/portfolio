@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import "@/app/ui/global.css";
-import { mulish } from "./ui/fonts";
-import Menu from "./ui/menu";
-import ScrollTop from "./ui/scrollTop";
-import { OpenToWorkBanner } from "./ui/banner";
+import { mulish } from "@/app/ui/fonts";
+import Menu from "@/app/ui/menu";
+import ScrollTop from "@/app/ui/scrollTop";
+import { OpenToWorkBanner } from "@/app/ui/banner";
 import clsx from "clsx";
 import { NavigationProvider } from "@/app/lib/context/navigationContext";
+import { I18nProviderClient } from "@/locales/client";
+import { getCurrentLocale } from "@/locales/server";
 
 export const metadata: Metadata = {
 	title: "Kaho Shibuya - Software Developer",
@@ -31,25 +33,28 @@ export const metadata: Metadata = {
 	},
 };
 
-export default function RootLayout({
+export default async function RootLayout({
 	children,
 }: Readonly<{
 	children: React.ReactNode;
 }>) {
+	const locale = await getCurrentLocale();
 	return (
 		<html lang='en' className={clsx(mulish.className, "overscroll-y-none")}>
 			<body
 				className='grid min-w-80 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 overscroll-contain'
 				suppressHydrationWarning={true}
 			>
-				<NavigationProvider>
-					<OpenToWorkBanner />
-					<Menu />
-					<div className='relative md:mt-8 md:col-span-2 xl:col-start-2 xl:col-end-5 2xl:col-start-3 2xl:col-end-7'>
-						{children}
-					</div>
-					<ScrollTop />
-				</NavigationProvider>
+				<I18nProviderClient locale={locale}>
+					<NavigationProvider>
+						<OpenToWorkBanner />
+						<Menu />
+						<div className='relative md:mt-8 md:col-span-2 xl:col-start-2 xl:col-end-5 2xl:col-start-3 2xl:col-end-7'>
+							{children}
+						</div>
+						<ScrollTop />
+					</NavigationProvider>
+				</I18nProviderClient>
 			</body>
 		</html>
 	);

@@ -2,7 +2,7 @@ import PopUp from "@/app/ui/contact/popup";
 import { getScopedI18n } from "@/locales/server";
 
 export default async function NotFound() {
-	const t = await getScopedI18n("notFound");
+	const t = await getScopedI18n("worksError");
 	return (
 		<div className='text-lavender mx-8 pb-20 2xl:pt-8'>
 			<PopUp

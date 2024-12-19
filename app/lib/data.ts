@@ -1,6 +1,7 @@
 const { CF_SPACE_ID, CF_DELIVERY_ACCESS_TOKEN } = process.env as {
 	[key: string]: string;
 };
+import { notFound } from "next/navigation";
 
 export const tags: string[] = ["about", "works"];
 
@@ -34,10 +35,10 @@ async function fetchGraphQL(query: string) {
 	}
 }
 
-export async function getSummary() {
+export async function getSummary(locale: string) {
 	const query = `
 		query {
-  			summaryCollection(limit:1){
+  			summaryCollection(limit:1, locale:"${locale}"){
     			items {
       				summary {
         				json
@@ -62,10 +63,10 @@ export async function getSkills() {
 	return response.data.skillsCollection.items[0].skills;
 }
 
-export async function getExperiences(limit: number = 3) {
+export async function getExperiences(locale: string, limit: number = 3) {
 	const query = `
 		query {
-			experienceCollection(order: endDate_DESC, limit: ${limit}) {
+			experienceCollection(order: endDate_DESC, limit: ${limit}, locale: "${locale}") {
 				items {
 					_id
 					title
@@ -82,10 +83,10 @@ export async function getExperiences(limit: number = 3) {
 	return response.data.experienceCollection.items;
 }
 
-export async function getEducations() {
+export async function getEducations(locale: string) {
 	const query = `
 		query {
-			educationCollection(order: endDate_DESC) {
+			educationCollection(order: endDate_DESC, locale: "${locale}") {
 				items {
 					_id
 					school
@@ -100,10 +101,10 @@ export async function getEducations() {
 	return response.data.educationCollection.items;
 }
 
-export async function getWorks(limit: number = 9) {
+export async function getWorks(locale: string, limit: number = 9) {
 	const query = `
 		query {
-			worksCollection(order: sys_firstPublishedAt_DESC, limit: ${limit}) {
+			worksCollection(order: sys_firstPublishedAt_DESC, limit: ${limit}, locale: "${locale}") {
 				items {
 					_id
 					title
@@ -117,10 +118,10 @@ export async function getWorks(limit: number = 9) {
 	return response.data.worksCollection.items;
 }
 
-export async function getWork(slug: string) {
+export async function getWork(slug: string, locale: string) {
 	const query = `
 		query {
-			worksCollection(where: {slug: "${slug}"}, limit: 1) {
+			worksCollection(where: {slug: "${slug}"}, limit: 1, locale: "${locale}") {
 				items {
 					previewUrl
 					sourceUrl
@@ -144,6 +145,7 @@ export async function getWork(slug: string) {
 		}
 	`;
 	const response = await fetchGraphQL(query);
+	if (!response.data.worksCollection.items.length) notFound();
 	return response.data.worksCollection.items[0];
 }
 
