@@ -1,4 +1,5 @@
-import { formatUSDate } from "@/app/lib/utils";
+import { formatDate } from "@/app/lib/utils";
+import { getCurrentLocale } from "@/locales/server";
 
 interface Education {
 	_id: string;
@@ -8,19 +9,21 @@ interface Education {
 	endDate: string;
 }
 
-export default function EducationSection({
+export default async function EducationSection({
 	educations,
 }: {
 	educations: Education[];
 }) {
+	const locale = await getCurrentLocale();
+
 	return (
 		<div>
 			<h2 className='mb-4 text-xl uppercase font-bold'>Education</h2>
 			{educations.map(education => {
 				const { _id, school, degree, startDate, endDate } = education;
 				// time format
-				const start = formatUSDate(startDate);
-				const end = formatUSDate(endDate);
+				const start = formatDate(startDate, locale);
+				const end = formatDate(endDate, locale);
 
 				return (
 					<div key={_id} className='mb-9'>

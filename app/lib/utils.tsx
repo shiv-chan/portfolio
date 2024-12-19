@@ -116,14 +116,24 @@ export const reverseChronologicalSort = (
 	});
 };
 
-export const formatUSDate = (date: string): string => {
-	return date
-		? new Intl.DateTimeFormat("en-US", {
-				year: "numeric",
-				month: "long",
-				timeZone: "UTC",
-		  }).format(new Date(date))
-		: "Current";
+export const formatDate = (date: string, locale: string): string => {
+	if (locale == "jp") {
+		return date
+			? new Intl.DateTimeFormat("ja", {
+					year: "numeric",
+					month: "short",
+					timeZone: "UTC",
+			  }).format(new Date(date))
+			: "現在";
+	} else {
+		return date
+			? new Intl.DateTimeFormat("en-US", {
+					year: "numeric",
+					month: "long",
+					timeZone: "UTC",
+			  }).format(new Date(date))
+			: "Current";
+	}
 };
 
 export const shimmer = (w: number, h: number) => `

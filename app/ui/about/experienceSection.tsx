@@ -1,10 +1,11 @@
 "use client";
 
-import { formatUSDate, options } from "@/app/lib/utils";
+import { formatDate, options } from "@/app/lib/utils";
 import { Document } from "@contentful/rich-text-types";
 import { documentToReactComponents as renderRichText } from "@contentful/rich-text-react-renderer";
 import { FaChevronRight, FaChevronDown } from "react-icons/fa6";
 import { useState } from "react";
+import { useCurrentLocale } from "@/locales/client";
 
 interface Experience {
 	_id: string;
@@ -45,9 +46,11 @@ export function Experience({
 }) {
 	const { title, company, startDate, endDate, description } = content;
 
+	const locale = useCurrentLocale();
+
 	// time format
-	const start = formatUSDate(startDate);
-	const end = formatUSDate(endDate);
+	const start = formatDate(startDate, locale);
+	const end = formatDate(endDate, locale);
 
 	const [showDetails, setShowDetails] = useState<boolean>(opened);
 	const toggleShowDetails = () => setShowDetails(prev => !prev);
