@@ -1,6 +1,8 @@
 import { init, send } from "@emailjs/browser";
 import { redirect } from "next/navigation";
 import isEmail from "validator/lib/isEmail";
+import en from "@/locales/en";
+import jp from "@/locales/jp";
 
 export type Errors = {
 	user_name?: string;
@@ -14,14 +16,22 @@ export type State = {
 	message?: string | null;
 };
 
-export async function sendEmail(prevState: State | null, formData: FormData) {
+type TranslationKeys = keyof typeof en.contact.formError;
+
+export async function sendEmail(
+	locale: string,
+	prevState: State | null,
+	formData: FormData
+) {
+	const translation = locale == "jp" ? jp : en;
+	const t = (key: TranslationKeys) => translation.contact.formError[key];
 	try {
 		let isValid: boolean = true;
 		let errorObj: Errors = {
-			user_name: "Please enter your name.",
-			user_email: "Please enter your email address.",
-			message: "Please write a message.",
-			"g-recaptcha-response": "Please answer the captcha.",
+			user_name: t("name"),
+			user_email: t("email"),
+			message: t("message"),
+			"g-recaptcha-response": t("recaptcha"),
 		};
 
 		const entries = formData.entries() as IterableIterator<
@@ -31,7 +41,7 @@ export async function sendEmail(prevState: State | null, formData: FormData) {
 			if (Boolean(val.trim())) {
 				if (key === "user_email") {
 					if (!isEmail(val)) {
-						errorObj[key] = "Please enter a valid email address.";
+						errorObj[key] = t("invalidEmail");
 						isValid = false;
 					} else {
 						delete errorObj[key];

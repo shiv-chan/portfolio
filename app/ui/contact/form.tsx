@@ -5,9 +5,13 @@ import { SubmitMessageButton } from "../button";
 import ReCaptcha from "./reCaptcha";
 import { useFormState } from "react-dom";
 import ShortUniqueId from "short-unique-id";
+import { useScopedI18n, useCurrentLocale } from "@/locales/client";
 
 export default function Form() {
-	const [state, formAction] = useFormState(sendEmail, null);
+	const t = useScopedI18n("contact");
+	const locale = useCurrentLocale();
+	const sendEmailWithLocale = sendEmail.bind(null, locale);
+	const [state, formAction] = useFormState(sendEmailWithLocale, null);
 	const uid = new ShortUniqueId({
 		dictionary: "alpha_upper",
 		length: 6,
@@ -20,7 +24,7 @@ export default function Form() {
 				<input
 					name='user_name'
 					type='text'
-					placeholder='Your Name'
+					placeholder={t("name")}
 					aria-describedby='name-error'
 					className='w-full text-lavender border-2 border-solid border-lavender p-1 placeholder:text-lavender/40'
 				/>
@@ -39,7 +43,7 @@ export default function Form() {
 				<input
 					name='user_email'
 					type='email'
-					placeholder='Email Address'
+					placeholder={t("email")}
 					aria-describedby='email-error'
 					className='w-full text-lavender border-2 border-solid border-lavender p-1 placeholder:text-lavender/40'
 				/>
@@ -57,7 +61,7 @@ export default function Form() {
 			<div>
 				<textarea
 					name='message'
-					placeholder='Message'
+					placeholder={t("message")}
 					aria-describedby='message-error'
 					className='w-full text-lavender border-2 border-solid border-lavender p-1 placeholder:text-lavender/40'
 				></textarea>

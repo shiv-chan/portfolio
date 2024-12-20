@@ -2,6 +2,7 @@
 
 import clsx from "clsx";
 import { mulish } from "./fonts";
+import { useScopedI18n } from "@/locales/client";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	children: React.ReactNode;
@@ -28,6 +29,7 @@ export function SubmitMessageButton({
 	className,
 }: React.ButtonHTMLAttributes<HTMLButtonElement>) {
 	const { pending } = useFormStatus();
+	const t = useScopedI18n("contact");
 
 	return (
 		<Button
@@ -35,7 +37,7 @@ export function SubmitMessageButton({
 			className={clsx("w-full", className)}
 			disabled={pending}
 		>
-			{pending ? "Sending..." : "Send"}
+			{pending ? t("sending") : t("send")}
 		</Button>
 	);
 }
