@@ -1,7 +1,14 @@
 import PopUp from "@/app/ui/contact/popup";
-import { getScopedI18n } from "@/locales/server";
+import { getScopedI18n, getStaticParams } from "@/locales/server";
+import { setStaticParamsLocale } from "next-international/server";
 
-export default async function NotFoundCatchAll() {
+export default async function NotFoundCatchAll({
+	params,
+}: {
+	params: { locale: string };
+}) {
+	const { locale } = params;
+	setStaticParamsLocale(locale);
 	const t = await getScopedI18n("notFound");
 	return (
 		<div className='text-lavender mx-8 pb-20 2xl:pt-8'>
@@ -14,4 +21,8 @@ export default async function NotFoundCatchAll() {
 			/>
 		</div>
 	);
+}
+
+export function generateStaticParams() {
+	return getStaticParams();
 }
