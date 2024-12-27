@@ -1,11 +1,13 @@
+"use client";
+
 import Form from "@/app/ui/contact/form";
 import Script from "next/script";
 import { renderReCaptcha } from "@/app/ui/contact/reCaptcha";
-import { getI18n, getCurrentLocale } from "@/locales/server";
+import { useI18n, useCurrentLocale } from "@/locales/client";
 
-export default async function Page() {
-	const t = await getI18n();
-	const locale = await getCurrentLocale();
+export default function Page() {
+	const t = useI18n();
+	const locale = useCurrentLocale();
 	return (
 		<>
 			<Script
@@ -13,7 +15,7 @@ export default async function Page() {
 				src={`https://www.google.com/recaptcha/enterprise.js?hl=${
 					locale == "jp" ? "ja" : "en"
 				}`}
-				onReady={renderReCaptcha}
+				onReady={() => renderReCaptcha(locale)}
 			/>
 			<div className='mx-8 pb-20 2xl:pt-8'>
 				<h2 className='text-2xl font-bold uppercase text-lavender mb-4'>
