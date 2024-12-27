@@ -6,17 +6,18 @@ import { FaCircleArrowUp } from "react-icons/fa6";
 
 export default function ScrollTop() {
 	const [scrollY, setScrollY] = useState<number>(0);
-	const handleScroll = throttle(() => {
-		setScrollY(window.scrollY);
-	}, 100);
 
 	useEffect(() => {
+		const handleScroll = throttle(() => {
+			setScrollY(window.scrollY);
+		}, 100);
+
 		window.addEventListener("scroll", handleScroll);
+
 		return () => {
 			window.removeEventListener("scroll", handleScroll);
 			handleScroll.cancel();
 		};
-		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return (
