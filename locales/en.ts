@@ -32,6 +32,11 @@ export default {
 		},
 		sending: "Sending...",
 		send: "Send",
+		thanks: {
+			heading: "Thank You!",
+			subText: "Your message has successfully been sent.",
+			buttonText: "Back to Top",
+		},
 	},
 	contactError: {
 		heading: "Error",

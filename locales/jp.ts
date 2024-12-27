@@ -32,6 +32,11 @@ export default {
 		},
 		sending: "送信中...",
 		send: "送信",
+		thanks: {
+			heading: "お問い合わせありがとうございます",
+			subText: "メッセージが送信されました",
+			buttonText: "トップページに戻る",
+		},
 	},
 	contactError: {
 		heading: "エラー",

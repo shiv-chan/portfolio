@@ -1,12 +1,14 @@
 import PopUp from "@/app/ui/contact/popup";
+import { getScopedI18n } from "@/locales/server";
 
-export default function Page() {
+export default async function Page() {
+	const t = await getScopedI18n("contact.thanks");
 	return (
 		<PopUp
 			succeed={true}
-			heading='Thank You!'
-			subText='Your message has successfully been sent.'
-			buttonText='Back to Top'
+			heading={t("heading")}
+			subText={t("subText")}
+			buttonText={t("buttonText")}
 			link='/'
 		/>
 	);
