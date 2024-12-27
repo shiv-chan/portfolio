@@ -27,7 +27,7 @@ const useNavigation = () => {
 	useEffect(() => {
 		setPreviousRoute(currentRoute);
 		setCurrentRoute(pathname);
-	}, [pathname]);
+	}, [currentRoute, pathname]);
 
 	return { previousRoute };
 };

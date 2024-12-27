@@ -1,6 +1,7 @@
 "use client";
 
-export function renderReCaptcha() {
+export function renderReCaptcha(locale: string) {
+	const hl = locale == "jp" ? "ja" : "en";
 	// @ts-ignore
 	if (typeof window !== "undefined" && window.grecaptcha) {
 		// @ts-ignore
@@ -11,11 +12,13 @@ export function renderReCaptcha() {
 				render(container, {
 					sitekey: process.env.NEXT_PUBLIC_SITE_KEY,
 					action: "send-email",
+					hl,
 				});
 			}
 		});
 	}
 }
+
 export default function ReCaptcha() {
 	return (
 		<>

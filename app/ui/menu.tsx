@@ -5,6 +5,7 @@ import Image from "next/image";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
 import SocialMedia from "./socialMedia";
+import LanguageToggle from "@/app/ui/languageToggle";
 import { useState, useEffect } from "react";
 import { useNavigationContext } from "@/app/lib/context/navigationContext";
 
@@ -25,7 +26,8 @@ export default function Menu() {
 		{ menu: "contact", animation: "animate-riseDelay1500" },
 	];
 	const pathname: string | null = usePathname();
-	const currentPage: string | null = pathname.split("/")[1];
+	const highlightMenu = (menu: string): boolean =>
+		pathname.split("/").includes(menu);
 	const menuList = menuItems.map((item, index) => {
 		const { menu, animation } = item;
 		const handleOnAnimationStart = () => {
@@ -40,13 +42,14 @@ export default function Menu() {
 				key={menu}
 				className={clsx([
 					{
-						"text-white bg-lavender drop-shadow-selected":
-							currentPage == `${menu}`,
+						"text-white bg-lavender drop-shadow-selected": highlightMenu(menu),
 					},
 					"hover:text-white hover:bg-lavender hover:drop-shadow-selected w-fit",
 					{ [animation]: isAnimating && !previousRoute },
 					`${
-						pathname !== "/" || isMenuVisible[index] || previousRoute
+						(pathname !== "/" && pathname !== "/jp") ||
+						isMenuVisible[index] ||
+						previousRoute
 							? "visible"
 							: "invisible"
 					}`,
@@ -59,7 +62,7 @@ export default function Menu() {
 	});
 
 	useEffect(() => {
-		if (pathname === "/") {
+		if (pathname === "/" || pathname === "/jp") {
 			setIsAnimating(true);
 		}
 	}, [pathname]);
@@ -68,15 +71,20 @@ export default function Menu() {
 		<div className='text-lavender md:h-dvh md:col-start-1 2xl:col-start-2 2xl:col-end-3 2xl:relative 2xl:pt-8'>
 			<div
 				className={`${
-					pathname !== "/" || previousRoute || isAnimating ? "hidden" : "block"
+					(pathname !== "/" && pathname !== "/jp") ||
+					previousRoute ||
+					isAnimating
+						? "hidden"
+						: "block"
 				} absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 motion-safe:animate-loadingBounce`}
 			>
 				Loading...
 			</div>
 			<div className='md:fixed md:w-min min-[2300px]:w-auto'>
+				<LanguageToggle />
 				<Link
 					href='/'
-					className='m-8 inline-block'
+					className='m-8 mt-4 inline-block'
 					onClick={() => {
 						window.scrollTo(0, 0);
 					}}
@@ -85,7 +93,9 @@ export default function Menu() {
 						className={clsx(
 							"text-3xl font-bold uppercase",
 							`${
-								pathname !== "/" || isTitleVisible || previousRoute
+								(pathname !== "/" && pathname !== "/jp") ||
+								isTitleVisible ||
+								previousRoute
 									? "visible"
 									: "invisible"
 							}`,
@@ -100,7 +110,9 @@ export default function Menu() {
 						className={clsx(
 							"text-base font-thin",
 							`${
-								pathname !== "/" || isTitleVisible || previousRoute
+								(pathname !== "/" && pathname !== "/jp") ||
+								isTitleVisible ||
+								previousRoute
 									? "visible"
 									: "invisible"
 							}`,
