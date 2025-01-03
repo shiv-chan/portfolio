@@ -9,6 +9,7 @@ import { NavigationProvider } from "@/app/lib/context/navigationContext";
 import { I18nProviderClient } from "@/locales/client";
 import { getCurrentLocale } from "@/locales/server";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 export const metadata: Metadata = {
 	title: "Kaho Shibuya - Software Developer",
@@ -58,6 +59,7 @@ export default async function RootLayout({
 				</I18nProviderClient>
 				<SpeedInsights />
 			</body>
+			<GoogleAnalytics gaId='G-XGZEK8TXQ8' />
 		</html>
 	);
 }
