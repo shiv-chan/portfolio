@@ -14,7 +14,7 @@ export function OpenToWorkBanner() {
 		(currentPage === "" || currentPage == "jp") &&
 		pathArr.length == 2 && (
 			<div className='sticky top-0 bg-lavender text-white uppercase font-bold text-sm text-center py-1.5 w-dvw h-fit md:col-span-1'>
-				{t("heading")}
+				{t("heading")}{" "}
 				<Link href='/contact' className='underline'>
 					{t("linkText")}
 				</Link>
