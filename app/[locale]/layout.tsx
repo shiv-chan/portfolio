@@ -8,6 +8,7 @@ import clsx from "clsx";
 import { NavigationProvider } from "@/app/lib/context/navigationContext";
 import { I18nProviderClient } from "@/locales/client";
 import { getCurrentLocale } from "@/locales/server";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 export const metadata: Metadata = {
 	title: "Kaho Shibuya - Software Developer",
@@ -55,6 +56,7 @@ export default async function RootLayout({
 						<ScrollTop />
 					</NavigationProvider>
 				</I18nProviderClient>
+				<SpeedInsights />
 			</body>
 		</html>
 	);

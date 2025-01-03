@@ -13,6 +13,7 @@
     "@contentful/rich-text-react-renderer": "^15.22.11",
     "@contentful/rich-text-types": "^16.8.5",
     "@emailjs/browser": "^4.4.1",
+    "@vercel/speed-insights": "^1.1.0",
     "clsx": "^2.1.1",
     "international-types": "^0.8.1",
     "lodash": "^4.17.21",
