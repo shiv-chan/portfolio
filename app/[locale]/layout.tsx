@@ -10,6 +10,7 @@ import { I18nProviderClient } from "@/locales/client";
 import { getCurrentLocale } from "@/locales/server";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import Footer from "@/app/ui/footer";
 
 export const metadata: Metadata = {
 	title: "Kaho Shibuya - Software Developer",
@@ -44,7 +45,7 @@ export default async function RootLayout({
 	return (
 		<html lang='en' className={clsx(mulish.className, "overscroll-y-none")}>
 			<body
-				className='grid min-w-80 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 overscroll-contain'
+				className='grid min-h-dvh grid-rows-[auto_auto_1fr] min-w-80 md:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-6 overscroll-contain'
 				suppressHydrationWarning={true}
 			>
 				<I18nProviderClient locale={locale}>
@@ -54,6 +55,7 @@ export default async function RootLayout({
 						<div className='relative md:mt-8 md:col-span-2 xl:col-start-2 xl:col-end-5 2xl:col-start-3 2xl:col-end-7'>
 							{children}
 						</div>
+						<Footer className="md:hidden self-end" />
 						<ScrollTop />
 					</NavigationProvider>
 				</I18nProviderClient>
