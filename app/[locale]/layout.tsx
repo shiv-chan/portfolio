@@ -61,7 +61,7 @@ export default async function RootLayout({
 				</I18nProviderClient>
 				<SpeedInsights />
 			</body>
-			<GoogleAnalytics gaId='G-XGZEK8TXQ8' />
+			{process.env.NODE_ENV !== 'development' && <GoogleAnalytics gaId='G-XGZEK8TXQ8' />}
 		</html>
 	);
 }
