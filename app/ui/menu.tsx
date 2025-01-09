@@ -69,7 +69,7 @@ export default function Menu() {
 	}, [pathname]);
 
 	return (
-		<div className='text-lavender md:h-dvh md:col-start-1 2xl:col-start-2 2xl:col-end-3 2xl:relative 2xl:pt-8'>
+		<div className='text-lavender md:h-dvh md:col-start-1 2xl:col-start-2 2xl:col-end-3 2xl:pt-8'>
 			<div
 				className={`${
 					(pathname !== "/" && pathname !== "/jp") ||
