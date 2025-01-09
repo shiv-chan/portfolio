@@ -8,6 +8,7 @@ import SocialMedia from "./socialMedia";
 import LanguageToggle from "@/app/ui/languageToggle";
 import { useState, useEffect } from "react";
 import { useNavigationContext } from "@/app/lib/context/navigationContext";
+import Footer from "@/app/ui/footer";
 
 export default function Menu() {
 	const { previousRoute } = useNavigationContext();
@@ -68,7 +69,7 @@ export default function Menu() {
 	}, [pathname]);
 
 	return (
-		<div className='text-lavender md:h-dvh md:col-start-1 2xl:col-start-2 2xl:col-end-3 2xl:relative 2xl:pt-8'>
+		<div className='text-lavender md:h-dvh md:col-start-1 2xl:col-start-2 2xl:col-end-3 2xl:pt-8'>
 			<div
 				className={`${
 					(pathname !== "/" && pathname !== "/jp") ||
@@ -127,7 +128,7 @@ export default function Menu() {
 						Software Developer
 					</p>
 				</Link>
-				<ul className='uppercase font-bold ml-8 pb-8 flex flex-col gap-2.5 text-xl'>
+				<ul className='uppercase font-bold ml-8 pb-16 flex flex-col gap-2.5 text-xl'>
 					{menuList}
 				</ul>
 				<Image
@@ -138,8 +139,8 @@ export default function Menu() {
 					priority={true}
 					className='fixed -bottom-[40px] -left-[80px] -z-10 2xl:absolute 2xl:top-0 2xl:left-0'
 				/>
+			<Footer className="hidden md:block" />
 			</div>
-			<SocialMedia />
 		</div>
 	);
 }
