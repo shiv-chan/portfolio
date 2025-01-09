@@ -13,6 +13,11 @@ const H5 = ({ children }: Readonly<{ children: React.ReactNode }>) => (
 		{children}
 	</h5>
 );
+const H6 = ({ children }: Readonly<{ children: React.ReactNode }>) => (
+	<h6 className='text-base font-bold font-base leading-relaxed mb-2'>
+		{children}
+	</h6>
+);
 const OrderedList = ({ children }: Readonly<{ children: React.ReactNode }>) => (
 	<ol className='list-decimal font-light ml-4 my-8 font-base'>{children}</ol>
 );
@@ -37,6 +42,9 @@ const Code = ({ children }: Readonly<{ children: React.ReactNode }>) => (
 	<code className='font-mono font-light text-xs bg-gray-200 px-1.5 py-1 rounded'>
 		{children}
 	</code>
+);
+const Bold = ({ children }: Readonly<{ children: React.ReactNode }>) => (
+	<strong className="font-base font-bold">{children}</strong>
 );
 const EmbeddedAsset = ({
 	src,
@@ -69,6 +77,9 @@ export const options = {
 		[BLOCKS.HEADING_5]: (node: Node, children: React.ReactNode) => (
 			<H5>{children}</H5>
 		),
+		[BLOCKS.HEADING_6]: (node: Node, children: React.ReactNode) => (
+			<H6>{children}</H6>
+		),
 		[BLOCKS.OL_LIST]: (node: Node, children: React.ReactNode) => (
 			<OrderedList>{children}</OrderedList>
 		),
@@ -82,12 +93,16 @@ export const options = {
 				<EmbeddedAsset src={url} width={width} height={height} alt={title} />
 			);
 		},
+		[BLOCKS.HR]: (node: Node, children: React.ReactNode) => (
+			<hr className="border-solid border-lavender-light my-8"/>
+		),
 		[INLINES.HYPERLINK]: (node: Node, children: React.ReactNode) => (
 			<HyperLink link={node.data.uri}>{children}</HyperLink>
 		),
 	},
 	renderMark: {
 		[MARKS.CODE]: (text: React.ReactNode) => <Code>{text}</Code>,
+		[MARKS.BOLD]: (text: React.ReactNode) => <Bold>{text}</Bold>,
 	},
 	preserveWhitespace: true,
 };
@@ -116,22 +131,41 @@ export const reverseChronologicalSort = (
 	});
 };
 
-export const formatDate = (date: string, locale: string): string => {
+interface DateTimeFormatOptions {
+	year: "numeric" | "2-digit";
+	month: "numeric" | "2-digit" | "short" | "long" | "narrow";
+	day: "numeric" | "2-digit";
+	timeZone: string;
+}
+
+export const formatDate = (date: string, locale: string, includeDay: boolean = false): string => {
 	if (locale == "jp") {
+		const options: DateTimeFormatOptions | Omit<DateTimeFormatOptions, "day"> = includeDay ? {
+			year: "numeric",
+			month: "short",
+			day: "numeric",
+			timeZone: "UTC",
+		} : {
+			year: "numeric",
+			month: "short",
+			timeZone: "UTC",
+		};
 		return date
-			? new Intl.DateTimeFormat("ja", {
-					year: "numeric",
-					month: "short",
-					timeZone: "UTC",
-			  }).format(new Date(date))
+			? new Intl.DateTimeFormat("ja", options).format(new Date(date))
 			: "現在";
 	} else {
+		const options: DateTimeFormatOptions | Omit<DateTimeFormatOptions, "day"> = includeDay ? {
+			year: "numeric",
+			month: "long",
+			day: "numeric",
+			timeZone: "UTC",
+		} : {
+			year: "numeric",
+			month: "long",
+			timeZone: "UTC",
+		};
 		return date
-			? new Intl.DateTimeFormat("en-US", {
-					year: "numeric",
-					month: "long",
-					timeZone: "UTC",
-			  }).format(new Date(date))
+			? new Intl.DateTimeFormat("en-US", options).format(new Date(date))
 			: "Current";
 	}
 };

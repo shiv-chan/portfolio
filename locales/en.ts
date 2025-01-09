@@ -47,4 +47,9 @@ export default {
 		heading: "I am open to work!",
 		linkText: "Contact",
 	},
+	privacyPolicy: {
+		heading: "Privacy Policy",
+		effectiveDate: "Effective Date",
+		text: 'Thank you for visiting my portfolio website ("Website"). Your privacy is important to me, and this Privacy Policy explains how I collect, use, and protect your personal information. By using this Website, you agree to the terms of this Privacy Policy.',
+	},
 } as const;

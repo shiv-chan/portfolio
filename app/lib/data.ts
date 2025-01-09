@@ -163,3 +163,20 @@ export async function getAsset(id: string) {
 	const response = await fetchGraphQL(query);
 	return response.data.asset;
 }
+
+export async function getPrivacyPolicy(locale: string) {
+	const query = `
+		query {
+			privacyPolicyCollection(locale: "${locale}") {
+				items {
+					effectiveDate
+					terms {
+						json
+					}
+				}
+			}
+		}
+	`;
+	const response = await fetchGraphQL(query);
+	return response.data.privacyPolicyCollection.items[0];
+}
