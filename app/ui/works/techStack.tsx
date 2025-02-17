@@ -22,6 +22,8 @@ import {
 	SiFigma,
 	SiContentful,
 	SiGraphql,
+	SiAmazonwebservices,
+	SiJenkins
 } from "react-icons/si";
 import { FaGears } from "react-icons/fa6";
 
@@ -54,6 +56,8 @@ const techStackIcons: Record<string, IconType> = {
 	figma: SiFigma,
 	contentful: SiContentful,
 	graphql: SiGraphql,
+	"amazon s3": SiAmazonwebservices,
+	jenkins: SiJenkins
 };
 
 export default function TechStack({
